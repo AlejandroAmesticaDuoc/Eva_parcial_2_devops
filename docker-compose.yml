@@ -1,5 +1,6 @@
 services:
   frontend:
+    image: ghcr.io/alejandroamesticaduoc/tienda-tech-frontend:latest
     build: ./tienda-tech-frontend
     container_name: tienda-tech-frontend
     ports:
@@ -23,6 +24,7 @@ services:
       start_period: 10s
 
   backend:
+    image: ghcr.io/alejandroamesticaduoc/tienda-tech-backend:latest
     build: ./tienda-tech-backend
     container_name: tienda-tech-backend
     environment:
@@ -52,6 +54,7 @@ services:
       start_period: 40s
 
   db:
+    image: ghcr.io/alejandroamesticaduoc/tienda-tech-db:latest
     build: ./tienda-tech-db
     container_name: tienda-tech-db
     ports:
@@ -72,6 +75,20 @@ services:
       timeout: 5s
       retries: 10
       start_period: 30s
+
+  watchtower:
+    image: containrrr/watchtower:latest
+    container_name: watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      WATCHTOWER_CLEANUP: "true"
+      WATCHTOWER_POLL_INTERVAL: 30
+      DOCKER_API_VERSION: "1.43"
+    command: tienda-tech-frontend tienda-tech-backend tienda-tech-db
+    restart: always
+    networks:
+      - app-network
 
 networks:
   app-network:
