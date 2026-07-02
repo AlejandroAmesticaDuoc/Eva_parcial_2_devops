@@ -58,3 +58,28 @@ docker rm tienda-tech-db
 ## Notas
 - La base de datos se inicializa automáticamente con el script `db/init.sql` en el primer arranque.
 - Puedes modificar el frontend y backend, reconstruir y volver a levantar los contenedores.
+
+
+## Observabilidad y Cumplimiento (EP3)
+
+Este proyecto extiende el pipeline de EP2 con observabilidad, metricas y politicas de cumplimiento automatizado.
+
+### Monitoreo y observabilidad (IE1, IE2)
+- **AWS CloudWatch + SSM Agent** sobre la instancia EC2: metricas de CPU, memoria y disco, dashboard `tienda-tech-ep3` y alarma de CPU > 70% con notificacion por correo via Amazon SNS.
+- **Kubernetes (k3s)**: los 3 microservicios (frontend, backend, base de datos) desplegados en el namespace `tienda`; observabilidad de recursos con `metrics-server` (`kubectl top pods`).
+
+### Metricas de calidad y CI/CD (IE3)
+- **SonarCloud**: cobertura de pruebas, bugs, vulnerabilidades y code smells (dashboard del proyecto en sonarcloud.io).
+- **GitHub Actions**: tiempo de despliegue visible en cada ejecucion del workflow.
+
+### Politicas de cumplimiento (IE5)
+- **SonarCloud** (calidad) y **Snyk** (seguridad, `--severity-threshold=high`) ejecutados en cada push y pull request.
+- **Branch protection** en `main`: se exige Pull Request y que los checks de CI, Sonar y Snyk esten en verde antes de fusionar.
+- **Dependabot** mantiene las dependencias actualizadas.
+
+### Detencion del pipeline ante fallos criticos (IE6)
+- Los workflows de Sonar y Snyk terminan con `exit 1` ante un fallo de calidad o una vulnerabilidad alta, deteniendo el pipeline.
+- Combinado con branch protection, un Pull Request con un problema critico queda **bloqueado** y no se puede fusionar hasta corregirlo.
+
+### Uso de Inteligencia Artificial
+Se utilizo IA como apoyo para redaccion y automatizacion; el analisis y las decisiones tecnicas son propias del equipo (declaracion segun pauta EP3).
