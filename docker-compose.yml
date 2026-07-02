@@ -1,6 +1,6 @@
 services:
   frontend:
-    image: 342023363393.dkr.ecr.us-east-1.amazonaws.com/tienda-tech-frontend:latest
+    image: 851725328977.dkr.ecr.us-east-1.amazonaws.com/tienda-tech-frontend
     build: ./tienda-tech-frontend
     container_name: tienda-tech-frontend
     ports:
@@ -24,7 +24,7 @@ services:
       start_period: 10s
 
   backend:
-    image: 342023363393.dkr.ecr.us-east-1.amazonaws.com/tienda-tech-backend:latest
+    image: 851725328977.dkr.ecr.us-east-1.amazonaws.com/tienda-tech-backend
     build: ./tienda-tech-backend
     container_name: tienda-tech-backend
     environment:
@@ -54,7 +54,7 @@ services:
       start_period: 40s
 
   db:
-    image: 342023363393.dkr.ecr.us-east-1.amazonaws.com/tienda-tech-db:latest
+    image: 851725328977.dkr.ecr.us-east-1.amazonaws.com/tienda-tech-db
     build: ./tienda-tech-db
     container_name: tienda-tech-db
     ports:
