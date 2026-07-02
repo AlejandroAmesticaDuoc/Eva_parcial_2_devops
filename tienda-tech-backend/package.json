@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "jest --forceExit --detectOpenHandles"
+    "test": "jest --coverage --coverageReporters=lcov --coverageReporters=text --forceExit --detectOpenHandles"
   },
   "dependencies": {
     "cors": "^2.8.5",
