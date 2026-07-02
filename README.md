@@ -80,6 +80,3 @@ Este proyecto extiende el pipeline de EP2 con observabilidad, metricas y politic
 ### Detencion del pipeline ante fallos criticos (IE6)
 - Los workflows de Sonar y Snyk terminan con `exit 1` ante un fallo de calidad o una vulnerabilidad alta, deteniendo el pipeline.
 - Combinado con branch protection, un Pull Request con un problema critico queda **bloqueado** y no se puede fusionar hasta corregirlo.
-
-### Uso de Inteligencia Artificial
-Se utilizo IA como apoyo para redaccion y automatizacion; el analisis y las decisiones tecnicas son propias del equipo (declaracion segun pauta EP3).
